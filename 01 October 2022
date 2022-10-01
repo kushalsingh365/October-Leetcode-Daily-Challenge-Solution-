@@ -1,0 +1,45 @@
+class Solution {
+public:
+
+int solve(string s,int pos,unordered_map<int,int>& dp){
+    
+    if(pos>s.length())
+        return 0;
+    
+    if(pos==s.length())
+    {
+        
+        return dp[pos]=1;
+    }
+    
+    if(s[pos]=='0')
+        return dp[pos]=0;
+    
+    if(dp.find(pos)!=dp.end())
+        return dp[pos];
+    
+    int a = solve(s,pos+1,dp);
+    
+    if(pos+1<s.length()){
+    string k = "";
+    k += s[pos];
+    k += s[pos+1];
+    if(stoi(k)>=10&&stoi(k)<=26)
+    a += solve(s,pos+2,dp);
+    }
+    
+    return dp[pos]=a;
+    
+    
+    
+}
+int numDecodings(string s) {
+   
+    
+    
+    unordered_map<int,int> dp;
+    return solve(s,0,dp);
+    
+   
+}
+};
