@@ -1,0 +1,22 @@
+class Solution {
+public: int res =0;
+    int minCost(string colors, vector<int>& neededTime) {
+        int l=0; int r = 0 ;
+        int n = neededTime.size();
+        while(l< n && r<n)
+        {   int max_time = 0 ;
+            int sum = 0;
+            while(r<n && colors[l]==colors[r])
+            { // max from same color balloon and suming same color balloon.
+                 max_time =  max(max_time, neededTime[r]);
+                 sum += neededTime[r];
+                r++;
+            }
+          int time_need = sum-max_time; // exclude max time needed to burst balloon from same color group.
+            res+=time_need;
+            l=r; // left pointer change
+                 
+         }
+        return res;
+    }
+};
